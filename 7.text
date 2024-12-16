@@ -1,0 +1,115 @@
+
+package com.example.composetest
+
+
+
+
+
+import android.graphics.Paint
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.background
+import android.os.Bundle
+import androidx. compose. material3.Surface
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.ParagraphStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.myapplication.R
+import com.example.myapplication.ui.theme.MyApplicationTheme
+
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            MyApplicationTheme {
+                Surface(color= MaterialTheme.colorScheme.background)
+                {
+
+                }
+            }
+        }
+    }
+}
+@Composable
+fun ColumnScope.CustomsItem(){
+    Text(
+        text= stringResource(id= R.string.app_name),
+        modifier=Modifier
+            .background(MaterialTheme.colorScheme.primary)
+            .padding(16.dp)
+            .width(200.dp),
+        color=Color.White // ,
+              //  fontSize=MaterialTheme.typography.titleLarge,
+       // fontStyle= FontStyle.Italic,
+        //fontWeight= FontWeight.Bold,
+       // textAlign= Paint.Align.RIGHT
+        )
+}
+@Composable
+fun CustomsText2(){
+    Text(
+        buildAnnotatedString{
+            withStyle(style= ParagraphStyle(textAlign= TextAlign.Center)){
+           withStyle(style= SpanStyle(
+               color = Color.Red,
+               fontSize=60.sp,
+               fontWeight=FontWeight.Bold
+           )
+           )
+           {
+               append("A")
+           }
+            append("B")
+            append("C")
+            append("D")
+            append("E")
+        }
+        },modifier=Modifier.width(200.dp)
+    )
+}
+
+@Composable
+fun CustomsText3(){
+    Text(text="Hello World!".repeat(20),maxLines=2,//maxLines is used to display content in given maxLine
+     overflow= TextOverflow.Ellipsis// this Ellips is used to show that content has overflowed using "..."
+ )
+}
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    MyApplicationTheme{
+        Column(modifier=Modifier.fillMaxSize())
+        {
+            CustomsItem()
+            CustomsText2()
+            CustomsText3()
+        }
+    }
+}
